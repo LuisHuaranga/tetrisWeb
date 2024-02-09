@@ -7,12 +7,14 @@ import {CONFIG} from "./config.js"
 class Tetris {
 
     constructor() {
+
        
         this.init();
     }
 
   init() {
     this.dibujarCuadricula();
+    console.log("hola");
   }
 
   dibujarCuadricula() {
