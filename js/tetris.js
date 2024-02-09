@@ -7,7 +7,7 @@ import {CONFIG} from "./config.js"
 class Tetris {
 
     constructor() {
-
+        console.log("inicia el juego");
        
         this.init();
     }
