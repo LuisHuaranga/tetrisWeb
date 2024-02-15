@@ -3,13 +3,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    /* height: 100vh; */
     background-color: #ffffff;
 }
 
 #game-board {
-    background-color: #ffffff;
-    border: 0.5px solid #000000;
+    background-color: #3414e92c;
+    border: 2px solid #000000;
 }
-
-/* Estilos para las piezas de Tetris */
