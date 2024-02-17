@@ -6,29 +6,21 @@ export class Bloque {
     constructor(x = 0, y = 0, valor = 0, color) {
         this.x = x;
         this.y = y;
-        this.valor = valor;
-        if (this.valor) {
-            this.color = (color) ? color : Bloque.COLOR_PREDETERMINADO;
-        } else {
-            this.color =  Bloque.SIN_COLOR;
+        this._valor = valor;
+        this.color = (valor) ? ((color) ? color : Bloque.COLOR_PREDETERMINADO) : Bloque.SIN_COLOR;
+    }
+
+    get valor() {
+        return this._valor;
+    }
+
+    set valor(nuevoValor) { 
+        this._valor = nuevoValor;
+        if(!nuevoValor){
+            this.color = Bloque.COLOR_PREDETERMINADO;
         }
     }
-
-    moverAbajo() {
-        this.y++;
-    }
-
-    moverArriba() {
-        this.y--;
-    }
-
-    moverDerecha(){
-        this.x++;
-    }
-
-    moverIzquierda(){
-        this.y--;
-    }
+    
 }
 
 Bloque.SIN_COLOR = COLORES.SinColor;
