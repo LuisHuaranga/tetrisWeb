@@ -1,50 +1,49 @@
 import { Tetris } from "./tetris.js"
 import { Figura } from "./figura.js";
-import { Bloque } from "./bloque.js";
+import { FIGURA } from "./figuras-constantes.js";
 import { COLORES } from "./colores.js";
+import { Bloque } from "./bloque.js";
 
-const tetris = new Tetris(30,20,10,"game-board");
 
-const figura = new Figura(4, 3, tetris.figura.FIGURA_L , COLORES.Marron);
+const tetris = new Tetris(25,20,10,"game-board");
 
-console.log(figura);
+var figura = new Figura(1, 1, FIGURA.FIGURA_T , COLORES.Marron);
+// var figura2 = new Figura(4, 4, FIGURA.FIGURA_T , COLORES.Naranja);
 
-tetris.escribirFigura(figura);
+var bloque = new Bloque(3,5,1);
+tetris.escribirFigura(figura,1);
+// tetris.escribirFigura(figura2,1);
+
+  
 tetris.pintarTablero();
+  
 
-// function borrarCuadrado(cuadrado, x, y) {
-//   cuadrado.clearRect(x * blockSize, y * blockSize, blockSize, blockSize);
-// }
+window.addEventListener("keydown", (event) => {
+  let teclaPulsada = event.key;
+});
 
-// var estadoAnterior = false;
-// var estadoActual;
+window.addEventListener("keyup", (event) => {
+  let teclaPulsada = event.code ;
 
-// function game() {
-//   dibujarCuadrado(cuadro1, 0, positionY, "#ff0000");
-//   dibujarCuadricula();
-// }
+  if(teclaPulsada === "KeyA"){
+    figura.color = COLORES.Amarillo;
+    tetris.escribirFigura(figura,1);
+    console.log(figura);
+    // tetris.imprimitMatriz();
+    
+  }
+  else{
+    tetris.escribirFigura(figura,0);
+    // console.log(figura2);
 
-// function moverAbajo(){
-//   estadoActual = (teclaPulsada == "ArrowDown")
-//   if ( estadoActual && estadoAnterior == false) {
-//     borrarCuadrado(cuadro1, 0, positionY);
-//     positionY++;
-//     dibujarCuadrado(cuadro1, 0, positionY, "#ff0000");
-//     console.log("PULSASTE:" + teclaPulsada);
-//   }
-//   estadoAnterior = estadoActual;
-// }
+  }
 
-// window.addEventListener("keydown", (event) => {
-//   teclaPulsada = event.key;
-//   moverAbajo();
-//   console.log("abajito")
-// });
+  tetris.pintarTablero();
+  console.log(teclaPulsada)
+});
 
-// window.addEventListener("keyup", (event) => {
-//   teclaPulsada = null;
-//   estadoAnterior = false;
-// });
+
+
 
 
 

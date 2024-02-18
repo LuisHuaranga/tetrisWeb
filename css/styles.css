@@ -1,12 +1,31 @@
 /* styles.css */
+
+*,.tetris-container {
+    background-color: #000000;
+}
+
 .tetris-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #ffffff;
+    /* background-color: #ffffff; */
 }
 
 #game-board {
-    background-color: #3414e92c;
-    border: 2px solid #000000;
+    background-color: #2e46593e;
+    border: 2px solid #bd131357;
 }
+
+
+h1 {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 2em;
+    color: #ffffff; /* Verde oscuro */
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(6, 36, 7, 0.5);
+    -webkit-font-smoothing: none;
+    -moz-osx-font-smoothing: grayscale;
+    filter: blur(1px) grayscale(1) brightness(2) contrast(100%) saturate(0) hue-rotate(90deg);
+  }
+  
+  

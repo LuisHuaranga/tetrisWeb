@@ -1,14 +1,13 @@
-import { FIGURA } from "./figuras-constantes.js"
 import { Bloque } from "./bloque.js";
 
 
 export class Tetris {
 
+
   constructor(blockSize, filas, columnas, canvasID) {
     this.blockSize = blockSize;
     this.filas = filas;
     this.columnas = columnas;
-    this.figura = FIGURA;
     this._canvas = document.getElementById(canvasID);
     this._matrixTetris = [];
     this._init();
@@ -16,19 +15,18 @@ export class Tetris {
   
   _init() {
     this._dibujarCuadricula();
-    this._construirMatriz();   
+    this._construirMatriz();  
   }
 
   _construirMatriz() {
     const tablero = [];
-
-    for (let fila = 0; fila < this.filas; fila++) {
-      for (let columna = 0; columna < this.columnas; columna++) {
-        tablero.push(new Bloque(fila, columna));
-      }
+    
+    for (let x = 0; x < this.columnas; x++) {
+      for (let y = 0; y < this.filas; y++) {
+        this._matrixTetris.push(new Bloque(x, y));
     }
-
-    this._matrixTetris = tablero;
+  }
+  
   }
 
   _dibujarCuadricula() {
@@ -65,10 +63,10 @@ export class Tetris {
 
 
     // Establecer la sombra
-    ctx.shadowColor = 'black'; // Color de la sombra
-    ctx.shadowBlur = 10; // Desenfoque de la sombra
-    ctx.shadowOffsetX = 5; // Desplazamiento horizontal de la sombra
-    ctx.shadowOffsetY = 5; // Desplazamiento vertical de la sombra
+    // ctx.shadowColor = 'black'; // Color de la sombra
+    // ctx.shadowBlur = 10; // Desenfoque de la sombra
+    // ctx.shadowOffsetX = 5; // Desplazamiento horizontal de la sombra
+    // ctx.shadowOffsetY = 5; // Desplazamiento vertical de la sombra
 
     //color
     ctx.fillStyle = color;
@@ -79,52 +77,31 @@ export class Tetris {
     ctx.lineWidth = 2; // Grosor del borde
     ctx.strokeRect(xBlock, yBlock, blockSize, blockSize); // Dibujar el borde
 
-
-
-    // sombra superior
-    // ctx.fillStyle = 'rgba(255, 255, 255, 0.2)';
-    // ctx.fillRect(xBlock, yBlock , blockSize, blockSize * 0.2);
-    // sombra inferior
-    // ctx.fillStyle = 'rgba(255, 255, 255, 0.2)';
-    // ctx.fillRect(xBlock, yBlock + (blockSize - blockSize * 0.2), blockSize, blockSize * 0.2);
-    // sombra izquierda
-    // ctx.fillStyle = 'rgba(255, 255, 255, 0.2)';
-    // ctx.fillRect(xBlock, yBlock, blockSize * 0.2, blockSize);
-    // sombra derecha
-    // ctx.fillStyle = 'rgba(255, 255, 255, 0.2)';
-    // ctx.fillRect(xBlock + (blockSize - blockSize * 0.2) , yBlock, blockSize * 0.2, blockSize);
-
   }
 
-  _escribirBloque(bloque, valor) {
-    const { x, y , color} = bloque;
+  _escribirBloque(bloque) {
+    const { x , y } = bloque;
     const index = this._matrixTetris.findIndex(block => block.x === x && block.y === y);
     if (index !== -1) {
-      this._matrixTetris[index].color = color;
-      this._matrixTetris[index].valor = valor;
+      this._matrixTetris[index] = bloque;
     }
-  }
+  }  
 
   imprimitMatriz() {
     console.log(this._matrixTetris);
   }
 
   pintarTablero() {
-    this._matrixTetris.forEach(bloque => {
-      if (bloque.valor) {
+    this._matrixTetris.forEach(bloque => {  
         this._dibujarBloque(bloque);
-      }
     });
   }
 
-  escribirFigura( figura) {
-    const { x, y, tipoFigura} = figura;
-    for (let bloque of tipoFigura) {
-      const bloqueX = x + bloque.x;
-      const bloqueY = y + bloque.y;
-      
-      this._escribirBloque({ ...bloque, x: bloqueX, y: bloqueY}, 1); 
-    }
+  escribirFigura( figura , valor ) {
+    figura.tipoFigura.forEach(bloque => {
+      bloque.valor = valor;
+      this._escribirBloque(bloque); 
+    })
   }
 
 }
