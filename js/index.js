@@ -7,7 +7,7 @@ import { Bloque } from "./bloque.js";
 
 const tetris = new Tetris(25,20,10,"game-board");
 
-var figura = new Figura(1, 1, FIGURA.FIGURA_T , COLORES.Marron);
+var figura = new Figura(3, 0, FIGURA.FIGURA_I  , COLORES.Marron);
 // var figura2 = new Figura(4, 4, FIGURA.FIGURA_T , COLORES.Naranja);
 
 var bloque = new Bloque(3,5,1);
