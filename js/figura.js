@@ -13,11 +13,8 @@ export class Figura {
         this.tipoFigura.forEach(bloque => {
             bloque.x += x;
             bloque.y += y;
-            bloque.color = (bloque.valor) ? ((color) ? color : Bloque.COLOR_PREDETERMINADO) : Bloque.SIN_COLOR;
-            // bloque.color = color ? color : Bloque.COLOR_PREDETERMINADO;  
-            
+            bloque.color = (bloque.valor) ? ((color) ? color : Bloque.COLOR_PREDETERMINADO) : Bloque.SIN_COLOR;            
         });
-
     }
 
     get color(){
@@ -34,6 +31,9 @@ export class Figura {
 
     moverAbajo() {
         this.y++;
+        this.tipoFigura.forEach(bloque => {
+            bloque.moverAbajo();
+        })
     }
 
     moverArriba() {
@@ -42,9 +42,53 @@ export class Figura {
 
     moverDerecha(){
         this.x++;
+        this.tipoFigura.forEach(bloque => {
+            bloque.moverDerecha();
+        })
     }
 
     moverIzquierda(){
         this.x--;
+        this.tipoFigura.forEach(bloque => {
+            bloque.moverIzquierda();
+        })
+
     }
+
+    coordenadaYMaxima() {
+        let maxY = this.tipoFigura[0].y;
+
+        this.tipoFigura.forEach(bloque => {
+            if(bloque.y > maxY){
+                maxY = bloque.y;
+            }
+        });
+
+        return maxY;
+    }
+
+    coordenadaXIzquierda() {
+        let minX = this.tipoFigura[0].x;
+
+        this.tipoFigura.forEach(bloque => {
+            if(bloque.x < minX){
+                minX = bloque.x;
+            }
+        });
+
+        return minX;
+    }
+
+    coordenadaXDerecha() { 
+        let maxX = this.tipoFigura[0].x;
+
+        this.tipoFigura.forEach(bloque => {
+            if(bloque.x > maxX){
+                maxX = bloque.x;
+            }
+        });
+
+        return maxX;
+    }
+
 }

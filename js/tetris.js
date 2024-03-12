@@ -1,4 +1,6 @@
 import { Bloque } from "./bloque.js";
+import { COLORES } from "./colores.js";
+import { Controles } from "./controles.js";
 
 
 export class Tetris {
@@ -10,6 +12,9 @@ export class Tetris {
     this.columnas = columnas;
     this._canvas = document.getElementById(canvasID);
     this._matrixTetris = [];
+    this._limitInferior = this.filas - 1;
+    this._limitDerecha = this.columnas - 1
+    this._canvas.style.backgroundColor = COLORES.fondo;
     this._init();
   }
   
@@ -19,7 +24,6 @@ export class Tetris {
   }
 
   _construirMatriz() {
-    const tablero = [];
     
     for (let x = 0; x < this.columnas; x++) {
       for (let y = 0; y < this.filas; y++) {
@@ -38,7 +42,8 @@ export class Tetris {
     this._canvas.width = canvasWidth;
     this._canvas.height = canvasHeight;
 
-    ctx.strokeStyle = "#000"; // Color de las líneas de la cuadrícula
+
+    ctx.strokeStyle = COLORES.Rojo; // Color de las líneas de la cuadrícula
     ctx.beginPath();
 
     for (let x = 0; x <= canvasWidth; x += this.blockSize) {
@@ -84,6 +89,7 @@ export class Tetris {
     const index = this._matrixTetris.findIndex(block => block.x === x && block.y === y);
     if (index !== -1) {
       this._matrixTetris[index] = bloque;
+      this._dibujarBloque(this._matrixTetris[index]);
     }
   }  
 
@@ -98,10 +104,73 @@ export class Tetris {
   }
 
   escribirFigura( figura , valor ) {
-    figura.tipoFigura.forEach(bloque => {
+      figura.color = figura.color;
+      figura.tipoFigura.forEach(bloque => {
       bloque.valor = valor;
       this._escribirBloque(bloque); 
     })
   }
+
+  moverFiguraAbajo(figura){
+    if( figura.coordenadaYMaxima() < this._limitInferior ){
+      this.escribirFigura(figura,0);
+      figura.moverAbajo();
+      this.escribirFigura(figura,1);
+    }
+  }
+  
+  moverFiguraIzquierda(figura){
+    if( figura.coordenadaXIzquierda() > 0 ){
+      this.escribirFigura(figura,0);
+      figura.moverIzquierda();
+      this.escribirFigura(figura,1);
+    }
+  }
+
+  moverFiguraDerecha(figura){
+    if( figura.coordenadaXDerecha() < this._limitDerecha ){
+      this.escribirFigura(figura,0);
+      figura.moverDerecha();
+      this.escribirFigura(figura,1);
+    }
+  }
+
+  configurarControles(figura) {
+
+    const controles = new Controles();
+
+    controles.mapearTecla("ArrowLeft", () => {
+        
+
+      }, () => {
+        console.log("IZQ")
+        this.moverFiguraIzquierda(figura);
+    });
+
+    controles.mapearTecla("ArrowRight", () => {
+        
+
+      }, () => {
+      this.moverFiguraDerecha(figura);
+    });
+
+
+    controles.mapearTecla("ArrowUp", () => {
+        
+
+      }, () => {
+    
+    });
+
+    controles.mapearTecla("ArrowDown", () => {
+    
+    }, () => {
+        this.moverFiguraAbajo(figura);
+    });
+
+}
+
+
+
 
 }
