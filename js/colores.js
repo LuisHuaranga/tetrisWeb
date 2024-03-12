@@ -12,7 +12,9 @@ export const COLORES = {
     Rojo: "#FF0000",
     Rosa: "#FFC0CB",
     Salmon: "#FA8072",
-    SinColor: "#00000000",
     Turquesa: "#40E0D0",
-    Verde: "#00FF00"
+    Verde: "#00FF00",
+    fondo: "#1e2f41",
+    SinColor: "#00000000", //Color de fondo
+    
 };

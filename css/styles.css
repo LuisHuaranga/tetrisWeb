@@ -8,14 +8,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    /* background-color: #ffffff; */
 }
 
 #game-board {
-    background-color: #2e46593e;
     border: 2px solid #bd131357;
 }
-
 
 h1 {
     font-family: 'Press Start 2P', cursive;
