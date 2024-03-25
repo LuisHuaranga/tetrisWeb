@@ -138,39 +138,43 @@ export class Tetris {
   configurarControles(figura) {
 
     const controles = new Controles();
-
-    controles.mapearTecla("ArrowLeft", () => {
-        
-
-      }, () => {
-        console.log("IZQ")
-        this.moverFiguraIzquierda(figura);
-    });
-
-    controles.mapearTecla("ArrowRight", () => {
-        
-
-      }, () => {
-      this.moverFiguraDerecha(figura);
-    });
-
-
-    controles.mapearTecla("ArrowUp", () => {
-        
-
-      }, () => {
     
-    });
+    const configuracionTeclas = {
+      teclasMoverDer : 
+      {
+        teclas: ["ArrowRight","KeyD"],
+        presionar: () => {this.moverFiguraDerecha(figura);},
+        soltar: () =>{}
+      },
+      teclasMoverIzq : 
+      {
+        teclas: ["ArrowLeft","KeyA"],
+        presionar: () => {this.moverFiguraIzquierda(figura);},
+        soltar: () =>{}
+      },
+      teclasMoverAbaj :
+      {
+        teclas: ["ArrowDown","KeyS"],
+        presionar: () => {this.moverFiguraAbajo(figura);},
+        soltar: () =>{}
+      } ,
+      teclasRotar :
+      {
+        teclas:  ["ArrowUp","Space","KeyW"],
+        presionar: () => {console.log("rotar")},
+        soltar: () =>{}
+      }
+    }
+    console.log(configuracionTeclas);
 
-    controles.mapearTecla("ArrowDown", () => {
-    
-    }, () => {
-        this.moverFiguraAbajo(figura);
-    });
-
-}
-
-
-
+    for(let conf in configuracionTeclas){
+      configuracionTeclas[conf].teclas.forEach( (tecla) => {
+        controles.mapearTecla(tecla,
+          configuracionTeclas[conf].presionar,
+          configuracionTeclas[conf].soltar);
+      });
+    }
+  
+  }
 
 }
