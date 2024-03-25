@@ -1,7 +1,7 @@
 export class Controles {
     constructor() {
         this.accionesTecla = {};
-        this.inicializarEventos();
+        this._inicializarEventos();
     }
 
     mapearTecla(tecla, accionPresionada, accionSoltada) {
@@ -11,18 +11,18 @@ export class Controles {
         };
     }
 
-    inicializarEventos() {
+    _inicializarEventos() {
         window.addEventListener("keydown", (event) => {
-            this.ejecutarAccion(event.code, "presionada");
+            this._ejecutarAccion(event.code, "presionada");
         });
         
         window.addEventListener("keyup", (event) => {
-            // console.log(event.key)
-            this.ejecutarAccion(event.code, "soltada");
+            console.log(event.code),
+            this._ejecutarAccion(event.code, "soltada");
         });
     }
 
-    ejecutarAccion(tecla, tipo) {
+    _ejecutarAccion(tecla, tipo) {
         if (tecla in this.accionesTecla && tipo in this.accionesTecla[tecla]) {
             this.accionesTecla[tecla][tipo](); // Ejecuta la acción correspondiente
         }

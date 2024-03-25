@@ -13,28 +13,3 @@ tetris.escribirFigura(figura,1);
 
   
 tetris.pintarTablero();
-  
-
-// window.addEventListener("keyup", (event) => {
-//   let teclaPulsada = event.code ;
-//   console.log(teclaPulsada);
-//   if(teclaPulsada === "KeyA"){
-//     figura.color = COLORES.Amarillo;
-//     tetris.escribirFigura(figura,1);
-    
-//   }
-//   else{
-    
-
-//     tetris.moverFiguraAbajo(figura);
-
-
-//   }
-
-// });
-
-
-
-
-
-
