@@ -135,6 +135,14 @@ export class Tetris {
     }
   }
 
+  moverFiguraArriba(figura){
+    if( figura.coordenadaYMinima() > 0){
+      this.escribirFigura(figura,0);
+      figura.moverArriba();
+      this.escribirFigura(figura,1);      
+    }
+  }
+
   configurarControles(figura) {
 
     const controles = new Controles();
@@ -158,10 +166,16 @@ export class Tetris {
         presionar: () => {this.moverFiguraAbajo(figura);},
         soltar: () =>{}
       } ,
+      teclasArriba :
+      {
+        teclas:  ["Digit9","Numpad9"],
+        presionar: () => {this.moverFiguraArriba(figura)},
+        soltar: () =>{}
+      },
       teclasRotar :
       {
         teclas:  ["ArrowUp","Space","KeyW"],
-        presionar: () => {console.log("rotar")},
+        presionar: () => {console.log("Aqui funcion para rotar")},
         soltar: () =>{}
       }
     }

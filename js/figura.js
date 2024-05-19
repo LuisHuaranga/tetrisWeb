@@ -38,6 +38,9 @@ export class Figura {
 
     moverArriba() {
         this.y--;
+        this.tipoFigura.forEach(bloque => {
+            bloque.moverArriba();
+        })
     }
 
     moverDerecha(){
@@ -53,6 +56,18 @@ export class Figura {
             bloque.moverIzquierda();
         })
 
+    }
+
+    coordenadaYMinima() {
+        let minY = this.tipoFigura[0].y;
+
+        this.tipoFigura.forEach(bloque => {
+            if(bloque.y < minY){
+                minY = bloque.y;
+            }
+        });
+        
+        return minY;
     }
 
     coordenadaYMaxima() {
